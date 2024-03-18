@@ -15,15 +15,16 @@ const shoppingListDB = ref(database, "shoppingList");
 
 
 addBtn.addEventListener("click", function() {
-    let inputValue = inputField.value;
+    let inputValue = inputField.value.trim();
 
-    if(inputValue !== "") {
 // adding data to the Firebase database
+    if(inputValue !== "") {
         push(shoppingListDB,inputValue);
         clearInputFieldEl();
+    } else {
+        alert("Please enter...");
     }
-
-})
+});
 
 // input field clearing function
 function clearInputFieldEl() {
@@ -44,7 +45,7 @@ function appendItemToShoppingListEl(item) {
     newLi.textContent = itemValue;
     shoppingListEl.append(newLi);
 
-    newLi.addEventListener("dblclick", function() {
+     newLi.addEventListener("dblclick", function() {
         let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`);
         remove(exactLocationOfItemInDB);
     });
@@ -52,13 +53,12 @@ function appendItemToShoppingListEl(item) {
 
 // Function to check if an element already exists in the list
 function isItemInList(itemName) {
-
-
     if(typeof itemName === "string") {
         let listItemsOfProducts = shoppingListEl.getElementsByTagName("li");
 
          for(let i = 0; i < listItemsOfProducts.length; i++) {
             let listItemText = listItemsOfProducts[i].textContent;
+
             if(listItemText.toLowerCase() === itemName.toLowerCase()) {
                 return true;
             }

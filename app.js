@@ -22,7 +22,7 @@ addBtn.addEventListener("click", function() {
         push(shoppingListDB,inputValue);
         clearInputFieldEl();
     } else {
-        alert("Please enter...");
+        alert("The field is empty. Enter any word");
     }
 });
 

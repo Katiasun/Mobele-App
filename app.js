@@ -17,13 +17,12 @@ const shoppingListDB = ref(database, "shoppingList");
 addBtn.addEventListener("click", function() {
     let inputValue = inputField.value;
 
-    // if(inputValue === "") {
-    //     return;
-    // }
-
+    if(inputValue !== "") {
 // adding data to the Firebase database
-    push(shoppingListDB,inputValue);
-    clearInputFieldEl();
+        push(shoppingListDB,inputValue);
+        clearInputFieldEl();
+    }
+
 })
 
 // input field clearing function
@@ -89,24 +88,5 @@ onValue(shoppingListDB, (snapshot) => {
     } else {
         shoppingListEl.innerHTML = " No items here ... yet";
     }
-//     let itemsShopArr = Object.entries(snapshot.val());
-
-//     clearInputFieldEl();
-//     clearShoppingListEl();
-
-//     if(snapshot.exists()) {
-//         for(let i = 0; i < itemsShopArr.length; i++) {
-//             let currentItemFromShoppingList = itemsShopArr[i];
-//             let currentItemID = currentItemFromShoppingList[0];
-//             let currentItemValue = currentItemFromShoppingList[1];
-
-// //use function isItemInList checks if an element already exists
-//         if(!isItemInList(currentItemValue)) {
-//             appendItemToShoppingListEl(currentItemFromShoppingList);
-//             }
-//         }
-//     } else {
-//         shoppingListEl.innerHTML = "No items here... yet"
-//     }
 });
 
